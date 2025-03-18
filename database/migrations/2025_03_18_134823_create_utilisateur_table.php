@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->foreignId('role_id')->constrained('role');
+            $table->engine = 'InnoDB';
             $table->timestamps();
         });
     }
