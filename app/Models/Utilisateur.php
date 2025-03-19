@@ -13,7 +13,8 @@ class Utilisateur extends Model
         'nom',
         'prenom',
         'email',
-        'password'
+        'password',
+        'role_id'
     ];
 
     public function role() 

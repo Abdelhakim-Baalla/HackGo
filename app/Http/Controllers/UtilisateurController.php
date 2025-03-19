@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Utilisateur;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -12,20 +13,22 @@ class UtilisateurController extends Controller
 {
     public function utilisateur()
     {
-        $utilisateurs = DB::table('utilisateur')->get();
+        // $utilisateurs = DB::table('utilisateur')->get();
+        $utilisateurs = Utilisateur::all();
         return $utilisateurs;
     }
 
     public function utilisateurParId(Request $request)
     {
-        $utilisateurs = DB::table('utilisateur')->get()->where('id', '=', $request->id);
+        // $utilisateurs = DB::table('utilisateur')->get()->where('id', '=', $request->id);
+        $utilisateurs = Utilisateur::find($request->id);
         return $utilisateurs;
     }
 
     public function create(Request $request)
     {
        
-        DB::table('utilisateur')->insert([
+        Utilisateur::create([
             'nom' => $request->nom,
             'prenom' => $request->prenom,
             'email' => $request->email,
@@ -39,19 +42,24 @@ class UtilisateurController extends Controller
     public function update(Request $request)
     {
 
-        DB::table('utilisateur')->where('id', '=', $request->id)->update([
+        $user = Utilisateur::find($request->id);
+
+        $user->update([
             'nom' => $request->nom,
             'prenom' => $request->prenom,
             'email' => $request->email,
             'password' => $request->password,
             'updated_at' => now()
         ]);
+        
+        $user->save();
     }
 
 
     public function supprimer(Request $request)
     {
-        DB::table('utilisateur')->where('id', '=', $request->id)->delete();
+        $user = Utilisateur::find($request->id);
+        $user->delete();
     }
 
 }
