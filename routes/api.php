@@ -28,6 +28,15 @@ Route::controller(App\Http\Controllers\UtilisateurController::class)->group(func
     Route::delete('/utilisateur/supprimer/{id}', 'supprimer');
 });
 
+Route::controller(App\Http\Controllers\AuthController::class)->group(function () {
+    Route::get('/login', 'login');
+    Route::post('register', 'register');
+    // Route::get('/utilisateur/{id}', 'utilisateurParId');
+    // Route::post('/utilisateur/create', 'create');
+    // Route::put('/utilisateur/update/{id}', 'update');
+    // Route::delete('/utilisateur/supprimer/{id}', 'supprimer');
+});
+
 // Route::get('/hello', function () {
 //     return "Hello World!";
 // });
